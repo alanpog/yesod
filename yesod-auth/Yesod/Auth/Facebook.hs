@@ -68,10 +68,8 @@ parseCreds at' (Object m) = do
     id' <- m .: "id"
     let id'' = "http://graph.facebook.com/" `mappend` id'
     name <- m .: "name"
-    email <- m .: "email"
     return
         $ Creds "facebook" id''
-        $ maybe id (\x -> (:) ("verifiedEmail", x)) email
         $ maybe id (\x -> (:) ("displayName ", x)) name
         [ ("accessToken", at')
         ]
